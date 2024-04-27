@@ -35,6 +35,7 @@ function SignIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete="current-password"
           />
         </div>
         <button className="submit-button" type="submit">Sign in</button>

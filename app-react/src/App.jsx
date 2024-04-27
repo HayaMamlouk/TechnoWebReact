@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import './App.css';
-// import LandingPage from './LandingPage';
+import LandingPage from './LandingPage';
 import MainPage from './MainPage';
 
 function App() {
@@ -15,7 +15,3 @@ function App() {
 }
 
 export default App;
-
-
-
- 

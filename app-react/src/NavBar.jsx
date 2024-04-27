@@ -56,4 +56,5 @@ function NavBar({ currentPage, setCurrentPage }) {
         </div>
     );
     }
-    
+
+    export default NavBar;
