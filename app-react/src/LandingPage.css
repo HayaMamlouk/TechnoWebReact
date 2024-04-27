@@ -1,0 +1,132 @@
+/* LandingPage.css */
+/* the main container */
+
+
+:root {
+    /* CSS HEX */
+    --pink: #f6bbc1ff;
+    --russian-violet: #30214cff;
+    --burgundy: #71141eff;
+    --violet-jtc: #6c3252ff;
+    --rich-black: #04071aff;
+    --indigo-dye: #0b447bff;
+    --dark-purple: #321f37ff;
+    --glaucous: #7889b7ff;
+}
+
+.Container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LandingPage {
+    width: 60%;
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 1px rgba(9,9,11,.07),0px 2px 2px 0px rgba(9,9,11,.05);
+}
+
+.LandingImage {
+    flex-basis: 50%;
+    flex-shrink: 0;
+    background-image: url('https://images.unsplash.com/photo-1548983965-416c1920352e');
+    background-size: cover;
+    background-position: right;
+}
+
+.LandingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+
+.not-member-text {
+    text-align: left;
+    font-size: 0.75rem;
+    color: #000;
+    font-style: italic;
+    font-family: 'Inter', antialiased;
+    display: flex;
+    justify-content: center;
+}
+
+/* .button-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin: 1rem;
+    align-self: stretch;
+    font-family: 'Inter', antialiased;
+} */
+
+.not-member-button {
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-style: normal;
+    padding-left: 5px;
+    color: black;
+    cursor: pointer;
+    font-family: 'Inter', antialiased;
+}
+
+.not-member-button:hover {
+    text-decoration: underline;
+    color:var(--indigo-dye);
+    border: none;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* the input fields */
+.input-name {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+input {
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px solid rgba(9,9,11,.2);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+    margin: 7px 0 7px 0;
+}
+
+.submit-button {
+    font-size: 1rem;
+    font-family: 'Inter', antialiased;
+    font-weight: bold;
+    padding: 5px 7px;
+    background-color: var(--indigo-dye);
+    color: white;
+    position: center;
+    cursor: pointer;
+    width : 100%;
+    margin-top: 1rem;
+}
+
+.submit-button:hover {
+    
+    color: var(--violet-jtc);
+    background-color: white;
+    border: 1px solid black;
+}
+
+.SignIn, .SignUp {
+    font-size: 1rem;
+    color: black;
+    margin: 10px;
+    font-family: 'Inter', antialiased;
+};
