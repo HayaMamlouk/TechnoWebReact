@@ -1,15 +1,4 @@
-// NavBar
-// Composant contenant la barre de navigation. Celle-ci permet à l'utilisateur de
-// naviguer dans les différentes pages de l'application : il peut se déplacer dans
-// "Public forum", "Private forum" (réservé aux administrateurs), "Users", "Requests"
-// (réservé aux administrateurs) à travers les onglets ou visiter son profile en
-// cliquant sur "My profile". Il a aussi la possibilité de se déconnecter grâce au
-// bouton "Sign out".
-// props
-// - currentPage qui montre en soulignant quelle page est sélectionnée et fait
-// remonter un changement de page lors d'un clic sur un bouton de navigation
-
-function NavBar({ currentPage, setCurrentPage }) {
+function NavBar({ currentPage, setCurrentPage, setLoggedIn }) {
     return (
         <div className='NavBar'>
         <div className='NavBarButton'>
@@ -48,7 +37,7 @@ function NavBar({ currentPage, setCurrentPage }) {
             </button>
             <button
             className='sign-out'
-            onClick={() => setCurrentPage('sign out')}
+            onClick={() => setLoggedIn(false)}
             >
             Sign out
             </button>

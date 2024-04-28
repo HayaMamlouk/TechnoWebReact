@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Message from './Message';
 
 function Discussion(props) {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState(props.discussion.messages);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        // Fetch messages from the API using props.id
-    }, [props.id]);
+        // Fetch messages from the API using props.title of the discussion
+    }, [props.key]);
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    const handleSubmit = (content) => {
         const newMessage = {
-            id: messages.length,
-            userId: 1,  // for now
-            content: message,
-            date: new Date().toISOString(),
+            content: content,
             type: props.type,
-            replyTo: null, // Assuming this is the root message
-            replies: [],
-            replyCount: 0,
+            replies: [] // Initialize replies as an empty array for this message
         };
         setMessages([...messages, newMessage]);
-        setMessage('');
-    }
+    };
 
     return (
         <div className='Discussion'>
@@ -32,7 +25,11 @@ function Discussion(props) {
                     <Message key={message.id} message={message} handleSubmit={handleSubmit} />
                 ))}
             </ul>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit(message);
+                setMessage('');
+            }}>
                 <input
                     type='text'
                     value={message}

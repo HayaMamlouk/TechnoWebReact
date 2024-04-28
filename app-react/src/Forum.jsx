@@ -2,14 +2,33 @@ import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import Discussion from './Discussion';
 
-// here discussion is a list of discussion (check with toufic)
 function Forum() {
     const [type, setType] = useState('public');
-    
+    const [discussions, setDiscussions] = useState([]);
+    const [newDiscussionTitle, setNewDiscussionTitle] = useState('');
+
+    const addDiscussion = () => {
+        const newDiscussion = {
+            title: newDiscussionTitle,
+            messages: [] // Initialize messages as an empty array for this discussion
+        };
+        setDiscussions([...discussions, newDiscussion]);
+        setNewDiscussionTitle(''); // Reset the title input after adding a discussion
+    };
+
     return (
         <div className='Forum'>
-        <SearchBar />
-        <Discussion type={type} id={1} />  {/* id is fix for now check with toufic*/}
+            <SearchBar />
+            <input
+                type='text'
+                placeholder='Enter new discussion title'
+                value={newDiscussionTitle}
+                onChange={(e) => setNewDiscussionTitle(e.target.value)}
+            />
+            <button onClick={addDiscussion}>New Discussion</button>
+            {discussions.map(discussion => (
+                <Discussion key={discussion.title} discussion={discussion} type={type}/>
+            ))}
         </div>
     );
 }

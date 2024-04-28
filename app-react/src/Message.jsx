@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-
-function Message(props) {
+function Message({ message, handleSubmit }) {
     const [showReplies, setShowReplies] = useState(false);
     const [showReplyForm, setShowReplyForm] = useState(false);
     const [reply, setReply] = useState('');
 
-    const { message, handleSubmit } = props;
     const { id, type, userId, content, date, replyTo, replies } = message;
 
     const toggleReplies = () => {
@@ -19,14 +17,13 @@ function Message(props) {
 
     const handleReply = (e) => {
         e.preventDefault();
-        handleSubmit(reply, id); // Pass the reply and message id to the parent's handleSubmit function
+        handleSubmit(reply, id);
         setReply('');
         setShowReplyForm(false);
     };
 
     return (
         <li className='Message'>
-            <p>ID: {id}</p>
             <p>Type: {type}</p>
             <p>User ID: {userId}</p>
             <p>Content: {content}</p>
@@ -35,17 +32,15 @@ function Message(props) {
             <p>
                 Replies:
                 <br />
-                {showReplies && replies.map((reply, index) => (
-                    <React.Fragment key={index}>
-                        {reply.content} {/* Display the content of each reply */}
-                        <br />
-                    </React.Fragment>
-                ))}
-                <button>
-                     {showReplies ? `Hide ${replies.length} replies` : `Show ${replies.length} replies`} 
+                <button onClick={toggleReplies}>
+                    {showReplies ? `Hide ${replies.length} replies` : `Show ${replies.length} replies`} 
                 </button>
+                {showReplies && replies.map((reply, index) => (
+                    <div key={index}>
+                        {reply.content}
+                    </div>
+                ))}
             </p>
-            <p>Reply Count: {replies.length}</p>
             <button onClick={toggleReplyForm}>Reply</button>
             {showReplyForm && (
                 <form onSubmit={handleReply}>

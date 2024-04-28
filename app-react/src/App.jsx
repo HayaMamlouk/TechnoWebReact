@@ -4,14 +4,9 @@ import LandingPage from './LandingPage';
 import MainPage from './MainPage';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
-  // Function to toggle the loggedIn state
-  const toggleLoggedIn = () => {
-    setLoggedIn(!loggedIn);
-  };
-
-  return loggedIn ? (<MainPage />) : (<LandingPage />);
+  return loggedIn ? (<MainPage setLoggedIn={setLoggedIn}/>) : (<LandingPage />);
 }
 
 export default App;

@@ -8,24 +8,19 @@ import SearchResult from './SearchResult'
 import Profile from './Profile'
 import LandingPage from './LandingPage';
 
-function MainPage({ loggedIn }) {
+function MainPage({setLoggedIn}) {
   const [currentPage, setCurrentPage] = useState('public forum');
-
-  // Redirect the user to the landing page if they are not logged in
-  if (!loggedIn) {
-    return <LandingPage />;
-  }
 
   return (
     <div className='Container'>
-      <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <NavBar currentPage={currentPage} setCurrentPage={setCurrentPage} setLoggedIn={setLoggedIn} />
       {currentPage === 'public forum' && <Forum />}
       {currentPage === 'private forum' && <Forum />}
       {currentPage === 'users' && <Users />}
       {currentPage === 'requests' && <Requests />}
       {currentPage === 'search result' && <SearchResult />}
       {currentPage === 'profile' && <Profile />}
-      {currentPage === 'sign out' && <LandingPage />}
+
     </div>
   );
 }
