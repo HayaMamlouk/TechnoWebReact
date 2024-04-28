@@ -68,8 +68,8 @@
     flex-basis: 50%;
     flex-shrink: 0;
     background-image: url('https://images.unsplash.com/photo-1548983965-416c1920352e');
-    background-size: cover;
-    background-position: right;
+    background-size: 300%;
+    background-position: bottom right;
 }
 
 .LandingForm {
