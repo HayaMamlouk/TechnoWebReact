@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function Message({ message, handleSubmit }) {
     const [showReplies, setShowReplies] = useState(false);

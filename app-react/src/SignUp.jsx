@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function SignUp({ toggleHasAccount }) {
   const [username, setUsername] = useState('');
@@ -21,6 +21,7 @@ function SignUp({ toggleHasAccount }) {
     console.log('First name:', firstName);
     console.log('Last name:', lastName);
     // For example, you might want to call an API to create a new user
+    // Then wait for validation
   };
 
   return (

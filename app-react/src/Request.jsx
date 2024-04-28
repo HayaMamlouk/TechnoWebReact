@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 function Request(props) {
     const { request, handleAccept, handleReject } = props;
     const { id, firstname, lastname } = request;

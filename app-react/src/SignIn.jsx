@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-function SignIn({ toggleHasAccount }) {
+function SignIn({ toggleHasAccount, setLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,6 +11,8 @@ function SignIn({ toggleHasAccount }) {
     console.log('Username:', username);
     console.log('Password:', password);
     // For example, you might want to call an authentication API here
+    // Then set logged in: true
+    setLoggedIn(true);
   };
 
   return (

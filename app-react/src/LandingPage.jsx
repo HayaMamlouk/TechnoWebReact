@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './LandingPage.css';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-function LandingPage({ loggedIn }) {
+function LandingPage({ setLoggedIn }) {
   const [hasAccount, setHasAccount] = useState(true);
 
   const toggleHasAccount = () => {
     setHasAccount(!hasAccount);
   };
-
-  // Redirect the user to the main page if they are already logged in
-  if (loggedIn) {
-    return <Redirect to="/MainPage" />;
-  }
 
   return (
     <div className='LandingPage'>
@@ -21,7 +16,7 @@ function LandingPage({ loggedIn }) {
       <div className='LandingPageContainer'>
         <div className='LandingImage' />
           {hasAccount ? (
-            <SignIn toggleHasAccount={toggleHasAccount} />
+            <SignIn toggleHasAccount={toggleHasAccount} setLoggedIn={setLoggedIn} />
           ) : (
             <SignUp toggleHasAccount={toggleHasAccount} />
           )}

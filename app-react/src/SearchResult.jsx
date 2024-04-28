@@ -8,7 +8,7 @@
 // - messages une liste des messages qui correspondent aux termes de la
 // recherche
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Message from './Message';
 
 function SearchResult(props) {

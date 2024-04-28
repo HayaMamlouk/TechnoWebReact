@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
 import Message from './Message';
 
 function Discussion(props) {
