@@ -16,42 +16,16 @@ function LandingPage({ loggedIn }) {
   }
 
   return (
-    <div className='Container'>
-      <div className='LandingPage'>
-        <div className='LandingImage'>
-
-        </div>
-        <div className="LandingForm">
+    <div className='LandingPage'>
+      <div className="LandingPageBackground"/>
+      <div className='LandingPageContainer'>
+        <div className='LandingImage' />
           {hasAccount ? (
-            <>
-            <SignIn />
-            <div className="button-text-container">
-              <div className="not-member-text">
-                Not a member yet? 
-                <a onClick={toggleHasAccount} className="not-member-button">
-                Create an account
-              </a>
-              </div>
-              
-            </div>
-            </>
+            <SignIn toggleHasAccount={toggleHasAccount} />
           ) : (
-
-            <>
-            <SignUp />
-            <div className="button-text-container">
-              <div className="not-member-text">
-                Already a member? 
-                <a onClick={toggleHasAccount} className="not-member-button">
-                  Sign in
-                </a>
-              </div>
-            </div>
-          </>
-            
+            <SignUp toggleHasAccount={toggleHasAccount} />
           )}
         </div>
-      </div>
     </div>
   );
 }

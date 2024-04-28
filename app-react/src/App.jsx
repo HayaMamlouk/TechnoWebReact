@@ -4,7 +4,7 @@ import LandingPage from './LandingPage';
 import MainPage from './MainPage';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return loggedIn ? (<MainPage setLoggedIn={setLoggedIn}/>) : (<LandingPage />);
 }

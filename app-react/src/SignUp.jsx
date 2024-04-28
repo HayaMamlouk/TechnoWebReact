@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SignUp() {
+function SignUp({ toggleHasAccount }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,72 +24,84 @@ function SignUp() {
   };
 
   return (
-    <div className="SignUp">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+    <form className="LandingForm" onSubmit={handleSubmit}>
+      <h2 className="Title">Sign Up</h2>
       <div className='input-name'>
-          <div className='input-container'>
-          <label htmlFor="firstName">First name</label>
-            <input
-                type="text"
-                id="firstName"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-            />
+        <div className='input-container'>
+        <label className="label" htmlFor="firstName">First name</label>
+          <input
+              type="text"
+              id="firstName"
+              className="input"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              autoComplete="name"
+          />
+        </div>
+        <div className='input-container'>
+        <label className="label" htmlFor="lastName">Last name</label>
+          <input
+              type="text"
+              id="lastName"
+              className="input"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              autoComplete="name"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="label" htmlFor="username">Username</label>
+        <div className='input-container'>
+          <input
+              type="text"
+              id="username"
+              className="input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              autoComplete="username"
+          />
           </div>
-          <div className='input-container'>
-          <label htmlFor="lastName">Last name</label>
-            <input
-                type="text"
-                id="lastName"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-            />
-          </div>
+      </div>
+      <div>
+        <label className="label" htmlFor="password">Password</label>
+        <div className='input-container'>
+          <input
+              type="password"
+              id="password"
+              className="input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+          />
         </div>
-        <div>
-          <label htmlFor="username">Username</label>
-          <div className='input-container'>
-            <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-            />
-            </div>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <div className='input-container'>
-            <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="new-password"
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm password</label>
-          <div className='input-container'>
-            <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-            />
-           </div>
-        </div>
-        <button className="submit-button" type="submit">Sign up</button>
-      </form>
-    </div>
-    
+      </div>
+      <div>
+        <label className="label" htmlFor="confirmPassword">Confirm password</label>
+        <div className='input-container'>
+          <input
+              type="password"
+              id="confirmPassword"
+              className="input"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+          />
+         </div>
+      </div>
+      <button className="submit-button" type="submit">Sign up</button>
+      <span className="not-member-text">
+        Already a member?&nbsp;
+        <button onClick={toggleHasAccount} className="not-member-button">
+          Sign in
+        </button>
+      </span>
+    </form>
   );
 }
 
