@@ -7,7 +7,7 @@ function Profile(props) {
             <p>Name: {name}</p>
 
             <ul>
-                {messages.map((message, index) => (
+                {(messages ?? []).map((message, index) => (
                     <li key={index}>
                         {message.content}
                     </li>

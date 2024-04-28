@@ -2,7 +2,7 @@ function Users({ users }) {
     return (
         <div className='Users'>
             <ul>
-                {users.map((user) => (
+                {(users ?? []).map((user) => (
                     <li key={user.id}>
                         <span>User ID: {user.logins}</span>
                         <span>Username: {user.username}</span>
