@@ -1,12 +1,11 @@
 import { useState } from 'react';
-// import './App.css';
 import LandingPage from './LandingPage';
 import MainPage from './MainPage';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState(undefined);
 
-  return loggedIn ? (<MainPage setLoggedIn={setLoggedIn} />) : (<LandingPage setLoggedIn={setLoggedIn} />);
+    return currentUser ? (<MainPage currentUser={currentUser} setCurrentUser={setCurrentUser} />) : (<LandingPage setCurrentUser={setCurrentUser} />);
 }
 
 export default App;

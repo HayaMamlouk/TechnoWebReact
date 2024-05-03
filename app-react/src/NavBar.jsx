@@ -1,51 +1,69 @@
 import './NavBar.css'
 
-function NavBar({ currentPage, setCurrentPage, setLoggedIn }) {
+function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
+    async function signOut() {
+        const response = await fetch('http://localhost:4000/api/auth', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'DELETE',
+            credentials: 'include'
+        })
+        if (response.status === 200) {
+            const data = await response.json();
+            if (data.success) {
+                setCurrentUser(undefined);
+            }
+        }
+    }
+
     return (
         <div className='NavBar'>
-            <div className="NavBarSection">
+            <div className='NavBarSection'>
                 <button
-                className={currentPage === 'public forum' ? 'selected' : ''}
-                onClick={() => setCurrentPage('public forum')}
+                    className={currentPage === 'public forum' ? 'selected' : ''}
+                    onClick={() => setCurrentPage('public forum')}
                 >
-                Public forum
+                    Public forum
                 </button>
                 <button
-                className={currentPage === 'private forum' ? 'selected' : ''}
-                onClick={() => setCurrentPage('private forum')}
+                    className={currentUser.role === "admin" && currentPage === 'private forum' ? 'selected' : ''}
+                    data-details={currentUser.role !== "admin" ? 'You don\'t have access to the private forum' : ''}
+                    disabled={currentUser.role !== "admin"}
+                    onClick={() => setCurrentPage('private forum')}
                 >
-                Private forum
+                    Private forum
                 </button>
                 <button
-                className={currentPage === 'users' ? 'selected' : ''}
-                onClick={() => setCurrentPage('users')}
+                    className={currentPage === 'users' ? 'selected' : ''}
+                    onClick={() => setCurrentPage('users')}
                 >
-                Users
+                    Users
                 </button>
                 <button
-                className={currentPage === 'requests' ? 'selected' : ''}
-                onClick={() => setCurrentPage('requests')}
+                    className={currentPage === 'requests' ? 'selected' : ''}
+                    onClick={() => setCurrentPage('requests')}
                 >
-                Requests
+                    Requests
                 </button>
             </div>
 
             <div className='NavBarSection'>
                 <button
-                className={currentPage === 'profile' ? 'selected' : ''}
-                onClick={() => setCurrentPage('profile')}
+                    className={currentPage === 'profile' ? 'selected' : ''}
+                    onClick={() => setCurrentPage('profile')}
                 >
-                My profile
+                    My profile
                 </button>
                 <button
-                className='sign-out'
-                onClick={() => setLoggedIn(false)}
+                    className='sign-out'
+                    onClick={signOut}
                 >
-                Sign out
+                    Sign out
                 </button>
             </div>
         </div>
     );
-    }
+}
 
-    export default NavBar;
+export default NavBar;

@@ -1,0 +1,28 @@
+.Forum {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 300px;
+}
+
+.ForumNewDiscussion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #ffffff1c;
+    background-color: #ffffff08;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.ForumNewDiscussion > h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.ForumDivider {
+    color: #ffffff1c;
+    margin: 0 40px;
+}

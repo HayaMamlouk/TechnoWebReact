@@ -1,17 +1,20 @@
-function Users({ users }) {
+import './Users.css'
+
+function Users({ users, setShownUser }) {
     return (
-        <div className='Users'>
-            <ul>
-                {(users ?? []).map((user) => (
-                    <li key={user.id}>
-                        <span>User ID: {user.logins}</span>
-                        <span>Username: {user.username}</span>
-                        <span>Date of Join: {user.dateOfJoin}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <ul className='Users'>
+            {(users ?? []).map((user) => (
+                <li className='User' key={user._id}>
+                    <span>{user.firstname} {user.lastname}</span>
+                    <span className='UserUsername'>@{user.login}</span>
+                    {user.role === 'admin' && (<span className='UserAdmin'>⭐</span>)}
+                    <button className='UserViewProfile SimpleButton' onClick={() => setShownUser(user)}>
+                        View profile
+                    </button>
+                </li>
+            ))}
+        </ul>
     );
-}  
+}
 
 export default Users;

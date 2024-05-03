@@ -1,5 +1,5 @@
 // SearchResult
-// Composant affichant une liste de messages (utilisant le composant Message)
+// Composant affichant une liste de messages (utilisant le composant Messages)
 // correspondants à la recherche avec le nombre de résultats trouvés, un message
 // "Aucun résultat trouvé" le cas écheant.
 // props
@@ -8,8 +8,8 @@
 // - messages une liste des messages qui correspondent aux termes de la
 // recherche
 
-import { useState, useEffect } from 'react';
-import Message from './Message';
+import { useEffect, useState } from 'react';
+import Messages from './Messages';
 
 function SearchResult(props) {
     const [messages, setMessages] = useState([]);
@@ -25,7 +25,7 @@ function SearchResult(props) {
             {messages.length === 0 && <p>No results found</p>}
             <ul>
                 {messages.map((message) => (
-                    <Message key={message.id} message={message} />
+                    <Messages key={message.id} message={message} />
                 ))}
             </ul>
         </div>

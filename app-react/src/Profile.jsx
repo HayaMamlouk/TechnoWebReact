@@ -1,19 +1,47 @@
-function Profile(props) {
-    const { id, name, messages } = props;
-    
-    return (
-        <li className='Profile'>
-            <p>ID: {id}</p>
-            <p>Name: {name}</p>
+import { useEffect, useState } from 'react';
+import MessagesSingle from './MessagesSingle';
+import './Profile.css'
 
-            <ul>
-                {(messages ?? []).map((message, index) => (
-                    <li key={index}>
-                        {message.content}
-                    </li>
-                ))}
-            </ul>
-        </li>
+function Profile({ user, users, setShownUser }) {
+    const [messages, setMessages] = useState([]);
+
+    async function fetchData() {
+        const response = await fetch('http://localhost:4000/api/messages/search', {
+            body: JSON.stringify({
+                query: user._id,
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            credentials: 'include'
+        });
+        if (response.status === 200) {
+            const data = await response.json();
+            setMessages((data ?? []).reverse());
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    return (
+        <div className='Profile'>
+            <span className='UserUsername'>@{user.login}</span>
+            <span className='UserDialogName'>
+                {user.firstname} {user.lastname}&nbsp;&nbsp;
+                {user.role === 'admin' && (<span className='UserAdmin'>⭐</span>)}
+            </span>
+            {messages.length > 0 ? (
+                <>
+                    <span className='UserDialogMessagesTitle'>Messages</span>
+                    <MessagesSingle messages={messages} users={users} setShownUser={setShownUser} />
+                </>
+            ) : (
+                <span className='UserDialogMessagesTitle'>No messages found</span>
+            )}
+        </div>
     );
 }
 

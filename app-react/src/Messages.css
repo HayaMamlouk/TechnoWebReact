@@ -1,0 +1,98 @@
+.RepliesLine {
+    position: relative;
+}
+
+.RepliesLine::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+    bottom: 0;
+    width: 2px;
+    background: #787e93;
+    clip-path: inset(0 0 var(--clip-height) 0);
+}
+
+.MessagesSingle {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.Message {
+    display: flex;
+}
+
+.MessagesSingle .Message {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid #ffffff1c;
+    background-color: #ffffff08;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.MessageReplyDesign {
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageReplyIndicator {
+    z-index: 2;
+    width: 30px;
+    height: 60px;
+    /*border-left: 2px solid #ffffff61;*/
+    /*border-bottom: 2px solid #ffffff61;*/
+    border-left: 2px solid #787e93;
+    border-bottom: 2px solid #787e93;
+    border-radius: 10px;
+    clip-path: inset(10px 10px 0 0);
+}
+
+.Message:last-child > .MessageReplyDesign > .MessageReplyLineHide {
+    z-index: 1;
+    flex: 1;
+    width: 2px;
+    /*background: #242e50;*/
+    margin-top: -20px;
+}
+
+.MessageContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageReplyDesign + .MessageContent,
+.MessageReplyIndicator + .MessageContent {
+    margin-top: 47px;
+}
+
+.MessageDetails {
+    color: #bcbcbc;
+    font-size: 14px;
+}
+
+.MessageAuthor {
+    font-weight: 600;
+}
+
+.MessageReplyCount {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.MessageAuthor:hover,
+.MessageReplyCount:hover {
+    text-decoration: underline;
+}
+
+.MessagesSingle .MessageAuthor {
+    text-decoration: none;
+}
+
+.MessageReplyForm {
+    display: flex;
+    gap: 12px;
+}

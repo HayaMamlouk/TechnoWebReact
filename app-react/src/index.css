@@ -1,26 +1,74 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color: #fff;
 }
 
 @supports (font-variation-settings: normal) {
-  :root { font-family: InterVariable, sans-serif; }
+    :root {
+        font-family: InterVariable, sans-serif;
+    }
 }
 
 body {
-  height: 100vh;
-  margin: 0;
+    height: 100vh;
+    margin: 0;
 }
 
 button:focus {
-  outline: none;
+    outline: none;
+}
+
+.SimpleInput {
+    padding: 5px 11px;
+    border-radius: 8px;
+    border: 1px solid #ffffff1c;
+    background-color: #ffffff08;
+    /* box-shadow: 0px 0px 0px 1px rgb(255 255 255 / 7%), 0px 2px 2px 0px rgb(255 255 255 / 5%); */
+    font-size: 14px;
+}
+
+.ElevatedInput {
+    padding: 5px 11px;
+    border-radius: 8px;
+    border: 1px solid rgba(9, 9, 11, .2);
+    background: #ffffff0f;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+}
+
+.SimpleButton {
+    border: 1px solid #ffffff1c;
+    border-radius: 8px;
+    padding: 5px 11px;
+    background-color: #ffffff08;
+    color: #ffffffd1;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+    transition: all 100ms ease-out;
+}
+
+.SimpleButton:hover {
+    background-color: #ffffff14;
+}
+
+.SimpleButton:active {
+    background-color: #ffffff21;
+}
+
+.highlight {
+    background: yellow;
+    color: black;
 }
 
 @keyframes opacity {
-  50% { opacity: 0; }
+    50% {
+        opacity: 0;
+    }
 }

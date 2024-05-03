@@ -1,0 +1,56 @@
+.Discussion {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid #ffffff1c;
+    background-color: #ffffff08;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.DiscussionDetails {
+    font-size: 14px;
+    color: #bcbcbc;
+}
+
+.DiscussionAuthor {
+    font-weight: 600;
+}
+
+.DiscussionAuthor:hover {
+    text-decoration: underline;
+}
+
+.DiscussionPrivateIcon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    background-color: #c6c6c64d;
+    border-radius: 4px;
+}
+
+.Discussion > h6 {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.DiscussionContent {
+    word-break: break-all;
+}
+
+.DiscussionReplyCount {
+    font-size: 14px;
+}
+
+.DiscussionReply {
+    display: flex;
+    gap: 12px;
+}
+
+.DiscussionReply > input {
+    flex: 1;
+}

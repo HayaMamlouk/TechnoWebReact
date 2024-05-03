@@ -60,8 +60,10 @@
     display: flex;
     border-radius: 16px;
     overflow: hidden;
-    background: #fff;
-    box-shadow: 0px 0px 0px 1px rgba(9,9,11,.07),0px 2px 2px 0px rgba(9,9,11,.05);
+    /*background: #fff;*/
+    background: #ffffff05;
+    backdrop-filter: blur(50px);
+    box-shadow: 0px 0px 0px 1px rgb(255 255 255 / 7%), 0px 2px 2px 0px rgb(255 255 255 / 5%);
 }
 
 .LandingImage {
@@ -84,7 +86,8 @@
 
 .not-member-text {
     font-size: 14px;
-    color: rgb(113 113 122);
+    /*color: rgb(113 113 122);*/
+    color: rgb(175 175 188);
 }
 
 .not-member-button {
@@ -121,6 +124,7 @@
     padding: 5px 11px;
     border-radius: 8px;
     border: 1px solid rgba(9, 9, 11, .2);
+    background: #ffffff0f;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
 }
 
@@ -132,7 +136,8 @@
     font-weight: 600;
     border: none;
     border-radius: 8px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+    transition: all 100ms ease-out;
 }
 
 .submit-button:hover {
@@ -141,4 +146,9 @@
 
 .submit-button:active {
     opacity: 0.6;
+}
+
+.AlertMessage {
+    font-size: 14px;
+    text-align: center;
 }
