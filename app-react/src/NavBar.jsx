@@ -1,4 +1,4 @@
-import './NavBar.css'
+import './NavBar.css';
 
 function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
     async function signOut() {
@@ -8,7 +8,7 @@ function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
             },
             method: 'DELETE',
             credentials: 'include'
-        })
+        });
         if (response.status === 200) {
             const data = await response.json();
             if (data.success) {
@@ -27,9 +27,9 @@ function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
                     Public forum
                 </button>
                 <button
-                    className={currentUser.role === "admin" && currentPage === 'private forum' ? 'selected' : ''}
-                    data-details={currentUser.role !== "admin" ? 'You don\'t have access to the private forum' : ''}
-                    disabled={currentUser.role !== "admin"}
+                    className={currentUser.role === 'admin' && currentPage === 'private forum' ? 'selected' : ''}
+                    data-details={currentUser.role !== 'admin' ? 'You don\'t have access to the private forum' : ''}
+                    disabled={currentUser.role !== 'admin'}
                     onClick={() => setCurrentPage('private forum')}
                 >
                     Private forum
@@ -41,7 +41,9 @@ function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
                     Users
                 </button>
                 <button
-                    className={currentPage === 'requests' ? 'selected' : ''}
+                    className={currentUser.role === 'admin' && currentPage === 'requests' ? 'selected' : ''}
+                    data-details={currentUser.role !== 'admin' ? 'You don\'t have access to requests' : ''}
+                    disabled={currentUser.role !== 'admin'}
                     onClick={() => setCurrentPage('requests')}
                 >
                     Requests
