@@ -92,7 +92,28 @@
     text-decoration: none;
 }
 
+.MessageAction {
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.MessageAction:not(:first-of-type) {
+    margin-left: 16px;
+}
+
+.MessageAction:hover {
+    text-decoration: underline;
+}
+
 .MessageReplyForm {
     display: flex;
     gap: 12px;
+    margin-top: 5px;
+}
+
+.MessageDeleted {
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.7;
 }

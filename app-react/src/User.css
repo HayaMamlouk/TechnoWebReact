@@ -23,6 +23,10 @@
     overflow-y: scroll;
 }
 
+.UserDialogClose {
+    align-self: flex-end;
+}
+
 .UserDialogName {
     display: inline-flex;
     align-items: center;

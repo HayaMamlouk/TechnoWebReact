@@ -34,6 +34,7 @@ function User({ user, users, setShownUser }) {
             }
         }}>
             <div className='UserDialogContainer'>
+                <button className='SimpleButton UserDialogClose' onClick={() => setShownUser(undefined)}>Close</button>
                 <span className='UserUsername'>@{user.login}</span>
                 <span className='UserDialogName'>
                     {user.firstname} {user.lastname}&nbsp;&nbsp;

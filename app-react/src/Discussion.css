@@ -42,6 +42,17 @@
     word-break: break-all;
 }
 
+.DiscussionAction {
+    align-self: flex-start;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.DiscussionAction:hover {
+    text-decoration: underline;
+}
+
 .DiscussionReplyCount {
     font-size: 14px;
 }

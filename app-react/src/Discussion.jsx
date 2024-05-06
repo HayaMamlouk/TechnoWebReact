@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Messages from './Messages';
 import './Discussion.css';
 
-function Discussion({ discussion, users, setShownUser, setUpdateMessages, highlight }) {
+function Discussion({ discussion, users, currentUser, setShownUser, setUpdateMessages, highlight }) {
     const [message, setMessage] = useState('');
     const [user, setUser] = useState(undefined);
 
@@ -20,6 +20,16 @@ function Discussion({ discussion, users, setShownUser, setUpdateMessages, highli
             credentials: 'include'
         });
         if (response.status === 201) {
+            setUpdateMessages(true);
+        }
+    }
+
+    async function deleteMessage() {
+        const response = await fetch(`http://localhost:4000/api/message/${discussion._id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        if (response.status === 200) {
             setUpdateMessages(true);
         }
     }
@@ -59,15 +69,15 @@ function Discussion({ discussion, users, setShownUser, setUpdateMessages, highli
             const keywords = query.split(' ');
 
             if (keywords === undefined || keywords.length === 0) {
-                return content
+                return content;
             }
 
             return content.replace(
-                new RegExp(`(${keywords.join("|")})`, "gi"),
-                `<span class="highlight">$1</span>`,
-            )
+                new RegExp(`(${keywords.join('|')})`, 'gi'),
+                `<span class='highlight'>$1</span>`,
+            );
         } catch (e) {
-            console.error(`RegExp error ${e}`)
+            console.error(`RegExp error ${e}`);
         }
     }
 
@@ -87,11 +97,18 @@ function Discussion({ discussion, users, setShownUser, setUpdateMessages, highli
                 </>
             ) : (
                 <>
-                    <h6 dangerouslySetInnerHTML={{ __html: highlightText(discussion.title, highlight) }} ></h6>
+                    <h6 dangerouslySetInnerHTML={{ __html: highlightText(discussion.title, highlight) }}></h6>
                     <span dangerouslySetInnerHTML={{ __html: highlightText(discussion.content, highlight) }} />
                 </>
             )}
-            <Messages messages={discussion.replies ?? []} users={users} setShownUser={setShownUser} />
+            {(currentUser?.role === 'admin' || currentUser?._id === discussion.userId) && (
+                <button
+                    className='DiscussionAction'
+                    onClick={() => deleteMessage()}
+                >
+                    🗑️ Delete
+                </button>
+            )}
             <form className='DiscussionReply' onSubmit={(e) => {
                 e.preventDefault();
                 postReply();
@@ -108,6 +125,8 @@ function Discussion({ discussion, users, setShownUser, setUpdateMessages, highli
                 />
                 <button className='SimpleButton' type='submit'>Reply</button>
             </form>
+            <Messages messages={discussion.replies ?? []} currentUser={currentUser} users={users}
+                      setShownUser={setShownUser} />
         </div>
     );
 }

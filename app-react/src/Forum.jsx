@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import Discussion from './Discussion';
 import './Forum.css';
 
-function Forum({ type, users, setShownUser }) {
+function Forum({ type, currentUser, users, setShownUser }) {
     const [discussions, setDiscussions] = useState([]);
     const [searchResults, setSearchResults] = useState(undefined);
     const [newDiscussionTitle, setNewDiscussionTitle] = useState('');
@@ -81,9 +81,13 @@ function Forum({ type, users, setShownUser }) {
                         <h2>No discussions yet</h2>
                     )}
                     {discussions.map(discussion => (
-                        <Discussion key={discussion._id} discussion={discussion} users={users}
-                                    setShownUser={setShownUser}
-                                    setUpdateMessages={setUpdateMessages} />
+                        <Discussion
+                            key={discussion._id}
+                            discussion={discussion}
+                            currentUser={currentUser}
+                            users={users}
+                            setShownUser={setShownUser}
+                            setUpdateMessages={setUpdateMessages} />
                     ))}
                 </>
             ) : (
@@ -92,9 +96,15 @@ function Forum({ type, users, setShownUser }) {
                         <h2>No results found</h2>
                     )}
                     {searchResults.results.filter((discussion) => discussion.type === type).map(discussion => (
-                        <Discussion key={discussion._id} discussion={discussion} users={users}
-                                    setShownUser={setShownUser}
-                                    setUpdateMessages={setUpdateMessages} highlight={searchResults.query} />
+                        <Discussion
+                            key={discussion._id}
+                            discussion={discussion}
+                            currentUser={currentUser}
+                            users={users}
+                            setShownUser={setShownUser}
+                            setUpdateMessages={setUpdateMessages}
+                            highlight={searchResults.query}
+                        />
                     ))}
                 </>
             )}

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import './Messages.css';
 
-function Message({ message, users, setShownUser, singleMessage }) {
+function Message({ message, currentUser, users, setShownUser, singleMessage }) {
     const [currentMessage, setCurrentMessage] = useState(message);
+    const [showReplyForm, setShowReplyForm] = useState(false);
     const [reply, setReply] = useState('');
     const [user, setUser] = useState(undefined);
+    const [deleted, setDeleted] = useState(false);
 
     async function fetchData() {
         const response = await fetch(`http://localhost:4000/api/message/${message._id}`, {
@@ -32,6 +34,16 @@ function Message({ message, users, setShownUser, singleMessage }) {
         });
         if (response.status === 201) {
             fetchData();
+        }
+    }
+
+    async function deleteMessage() {
+        const response = await fetch(`http://localhost:4000/api/message/${message._id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        if (response.status === 200) {
+            setDeleted(true);
         }
     }
 
@@ -81,32 +93,70 @@ function Message({ message, users, setShownUser, singleMessage }) {
                         onClick={() => setShownUser(user)}
                     >{user?.login}</button> • {timeAgo(currentMessage.date)}
                 </span>
-                <span>{currentMessage.content}</span>
-                <form className='MessageReplyForm' onSubmit={(e) => {
-                    e.preventDefault();
-                    postReply();
-                    setReply('');
-                }}>
-                    <input
-                        className='SimpleInput'
-                        id='reply'
-                        type='text'
-                        placeholder='Message'
-                        value={reply}
-                        onChange={(e) => setReply(e.target.value)}
-                        required
-                    />
-                    <button className='SimpleButton' type='submit'>Reply</button>
-                </form>
-                {(currentMessage.replies ?? []).length > 0 && (
-                    <Messages messages={currentMessage.replies} users={users} setShownUser={setShownUser} />
+                {!deleted ? (
+                    <>
+                        <span>{currentMessage.content}</span>
+                        <div>
+                            <button
+                                className='MessageAction'
+                                onClick={() => setShowReplyForm(true)}
+                            >
+                                💬 Reply
+                            </button>
+                            {(currentUser?.role === 'admin' || currentUser?._id === message.userId) && (
+                                <button
+                                    className='MessageAction'
+                                    onClick={() => deleteMessage()}
+                                >
+                                    🗑️ Delete
+                                </button>
+                            )}
+                        </div>
+                        {showReplyForm && (
+                            <form
+                                className='MessageReplyForm'
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    postReply();
+                                    setShowReplyForm(false);
+                                    setReply('');
+                                }}
+                                onReset={(e) => {
+                                    e.preventDefault();
+                                    setShowReplyForm(false);
+                                    setReply('');
+                                }}>
+                                <input
+                                    className='SimpleInput'
+                                    id='reply'
+                                    type='text'
+                                    placeholder='Message'
+                                    value={reply}
+                                    onChange={(e) => setReply(e.target.value)}
+                                    required
+                                />
+                                <button className='SimpleButton' type='reset'>Cancel</button>
+                                <button className='SimpleButton' type='submit'>Reply</button>
+                            </form>
+                        )}
+                        {(currentMessage.replies ?? []).length > 0 && (
+                            <Messages
+                                messages={currentMessage.replies}
+                                currentUser={currentUser}
+                                users={users}
+                                setShownUser={setShownUser}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <span className='MessageDeleted'>🚫 This message was deleted.</span>
                 )}
             </div>
         </li>
     );
 }
 
-function Messages({ messages, users, setShownUser, expandReplies, singleMessages }) {
+function Messages({ messages, currentUser, users, setShownUser, expandReplies, singleMessages }) {
     const [showReplies, setShowReplies] = useState(expandReplies ?? false);
 
     const messageList = useRef(undefined);
@@ -118,7 +168,7 @@ function Messages({ messages, users, setShownUser, expandReplies, singleMessages
         }
         const resizeObserver = new ResizeObserver(() => {
             const { height } = messageList.current.lastChild.firstChild.lastChild.getBoundingClientRect();
-            setStyle({ '--clip-height': `${height}px` })
+            setStyle({ '--clip-height': `${height}px` });
         });
         resizeObserver.observe(messageList.current);
         return () => resizeObserver.disconnect();
@@ -135,9 +185,17 @@ function Messages({ messages, users, setShownUser, expandReplies, singleMessages
                     </button>
                 </div>
             ) : (
-                <ul ref={!singleMessages ? messageList : undefined} className={!singleMessages ? 'RepliesLine' : ''} style={style}>
+                <ul ref={!singleMessages ? messageList : undefined} className={!singleMessages ? 'RepliesLine' : ''}
+                    style={style}>
                     {messages.map((message) => (
-                        <Message key={message._id} message={message} users={users} setShownUser={setShownUser} singleMessage={singleMessages} />
+                        <Message
+                            key={message._id}
+                            message={message}
+                            currentUser={currentUser}
+                            users={users}
+                            setShownUser={setShownUser}
+                            singleMessage={singleMessages}
+                        />
                     ))}
                 </ul>
             ))}
