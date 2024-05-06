@@ -24,7 +24,7 @@ function Discussion({ discussion, users, currentUser, setShownUser, setUpdateMes
         }
     }
 
-    async function deleteMessage() {
+    async function deleteDiscussion() {
         const response = await fetch(`http://localhost:4000/api/message/${discussion._id}`, {
             method: 'DELETE',
             credentials: 'include'
@@ -104,7 +104,7 @@ function Discussion({ discussion, users, currentUser, setShownUser, setUpdateMes
             {(currentUser?.role === 'admin' || currentUser?._id === discussion.userId) && (
                 <button
                     className='DiscussionAction'
-                    onClick={() => deleteMessage()}
+                    onClick={deleteDiscussion}
                 >
                     🗑️ Delete
                 </button>

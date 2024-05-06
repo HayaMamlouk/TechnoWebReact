@@ -44,3 +44,23 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+.UserDivider {
+    align-self: stretch;
+    color: #ffffff1c;
+    margin: 20px 40px;
+}
+
+.UserDeleteButton {
+    align-self: stretch;
+    color: #f85149 !important;
+}
+
+.UserDeleteButton:hover {
+    color: #fff !important;
+    background-color: #b62324 !important;
+}
+
+.UserDeleteButton:active {
+    background-color: #d03533 !important;
+}

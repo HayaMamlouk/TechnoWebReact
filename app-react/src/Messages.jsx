@@ -106,7 +106,7 @@ function Message({ message, currentUser, users, setShownUser, singleMessage }) {
                             {(currentUser?.role === 'admin' || currentUser?._id === message.userId) && (
                                 <button
                                     className='MessageAction'
-                                    onClick={() => deleteMessage()}
+                                    onClick={deleteMessage}
                                 >
                                     🗑️ Delete
                                 </button>

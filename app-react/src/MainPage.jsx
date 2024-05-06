@@ -25,7 +25,7 @@ function MainPage({ currentUser, setCurrentUser }) {
 
     useEffect(() => {
         fetchData();
-    }, [currentPage]);
+    }, [currentPage, shownUser]);
 
     return (
         <>
@@ -41,8 +41,11 @@ function MainPage({ currentUser, setCurrentUser }) {
                     <Forum type='private' currentUser={currentUser} users={users} setShownUser={setShownUser} />}
                 {currentPage === 'users' && <Users users={users} setShownUser={setShownUser} />}
                 {currentPage === 'requests' && <Requests setShownUser={setShownUser} />}
-                {currentPage === 'profile' && <Profile user={currentUser} users={users} setShownUser={setShownUser} />}
-                {shownUser !== undefined && <User user={shownUser} users={users} setShownUser={setShownUser} />}
+                {currentPage === 'profile' && <Profile user={currentUser} setCurrentUser={setCurrentUser} users={users}
+                                                       setShownUser={setShownUser} />}
+                {shownUser !== undefined &&
+                    <User currentUser={currentUser} setCurrentUser={setCurrentUser} user={shownUser} users={users}
+                          setShownUser={setShownUser} />}
             </div>
         </>
     );

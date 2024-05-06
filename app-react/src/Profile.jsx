@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import MessagesSingle from './MessagesSingle';
-import './Profile.css'
+import './Profile.css';
 
-function Profile({ user, users, setShownUser }) {
+function Profile({ user, setCurrentUser, users, setShownUser }) {
     const [messages, setMessages] = useState([]);
 
     async function fetchData() {
@@ -19,6 +19,16 @@ function Profile({ user, users, setShownUser }) {
         if (response.status === 200) {
             const data = await response.json();
             setMessages((data ?? []).reverse());
+        }
+    }
+
+    async function deleteAccount() {
+        const response = await fetch(`http://localhost:4000/api/user/${user._id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        if (response.status === 200) {
+            setCurrentUser(undefined);
         }
     }
 
@@ -41,6 +51,8 @@ function Profile({ user, users, setShownUser }) {
             ) : (
                 <span className='UserDialogMessagesTitle'>No messages found</span>
             )}
+            <hr className='UserDivider' />
+            <button className='SimpleButton UserDeleteButton' onClick={deleteAccount}>Delete account</button>
         </div>
     );
 }

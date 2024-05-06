@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import MessagesSingle from './MessagesSingle';
 import './User.css';
 
-function User({ user, users, setShownUser }) {
+function User({ currentUser, setCurrentUser, user, users, setShownUser }) {
     const [messages, setMessages] = useState([]);
 
     async function fetchData() {
@@ -20,6 +20,20 @@ function User({ user, users, setShownUser }) {
         if (response.status === 200) {
             const data = await response.json();
             setMessages((data ?? []).reverse());
+        }
+    }
+
+    async function deleteAccount() {
+        const response = await fetch(`http://localhost:4000/api/user/${user._id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        if (response.status === 200) {
+            if (currentUser?._id === user._id) {
+                setCurrentUser(undefined);
+            } else {
+                setShownUser(undefined);
+            }
         }
     }
 
@@ -40,7 +54,6 @@ function User({ user, users, setShownUser }) {
                     {user.firstname} {user.lastname}&nbsp;&nbsp;
                     {user.role === 'admin' && (<span className='UserAdmin'>⭐</span>)}
                 </span>
-                {/*<hr className='UserDialogDivider' />*/}
                 {messages.length > 0 ? (
                     <>
                         <span className='UserDialogMessagesTitle'>Messages</span>
@@ -48,6 +61,14 @@ function User({ user, users, setShownUser }) {
                     </>
                 ) : (
                     <span className='UserDialogMessagesTitle'>No messages found</span>
+                )}
+                {((currentUser?.role === 'admin' && user.role !== 'admin') || currentUser?._id === user._id) && (
+                    <>
+                        <hr className='UserDivider' />
+                        <button className='SimpleButton UserDeleteButton' onClick={deleteAccount}>Delete
+                            account
+                        </button>
+                    </>
                 )}
             </div>
         </div>
