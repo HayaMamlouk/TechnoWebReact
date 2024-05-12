@@ -48,6 +48,7 @@ function Forum({ type, currentUser, users, setShownUser }) {
         <div className='Forum'>
             <form className='ForumNewDiscussion' onSubmit={(e) => {
                 e.preventDefault();
+                console.log(`Creating discussion with title "${newDiscussionTitle}..."`);
                 postDiscussion();
                 setNewDiscussionTitle('');
                 setNewDiscussionContent('');

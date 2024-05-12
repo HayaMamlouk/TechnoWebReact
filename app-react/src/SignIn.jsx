@@ -26,6 +26,7 @@ function SignIn({ toggleHasAccount, setCurrentUser }) {
         <>
             <form className='LandingForm' onSubmit={(e) => {
                 e.preventDefault();
+                console.log(`Logging in... with username: ${username} and password: ${password}`);
                 login();
             }}>
                 <h2 className='Title'>Sign In</h2>

@@ -38,6 +38,7 @@ function SignUp({ toggleHasAccount }) {
             setAlertMessage('Passwords do not match!')
             return;
         }
+        console.log(`Creating account... with username: ${username}, password: ${password}, first name: ${firstName}, lastname: ${lastName}`);
         createUser();
     };
 

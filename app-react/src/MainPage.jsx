@@ -24,6 +24,7 @@ function MainPage({ currentUser, setCurrentUser }) {
     }
 
     useEffect(() => {
+        console.log(`Switched tab to: ${currentPage}`)
         fetchData();
     }, [currentPage, shownUser]);
 

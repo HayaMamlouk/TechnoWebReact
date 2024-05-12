@@ -2,6 +2,7 @@ import './NavBar.css';
 
 function NavBar({ currentUser, currentPage, setCurrentPage, setCurrentUser }) {
     async function signOut() {
+        console.log("Signing out and clearing cookies...")
         const response = await fetch('http://localhost:4000/api/auth', {
             headers: {
                 'Content-Type': 'application/json',

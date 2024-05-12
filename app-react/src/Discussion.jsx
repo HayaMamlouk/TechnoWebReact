@@ -97,7 +97,7 @@ function Discussion({ discussion, users, currentUser, setShownUser, setUpdateMes
                 </>
             ) : (
                 <>
-                    <h6 dangerouslySetInnerHTML={{ __html: highlightText(discussion.title, highlight) }}></h6>
+                    <h6 dangerouslySetInnerHTML={{ __html: highlightText(discussion.title, highlight) }} />
                     <span dangerouslySetInnerHTML={{ __html: highlightText(discussion.content, highlight) }} />
                 </>
             )}
@@ -111,6 +111,7 @@ function Discussion({ discussion, users, currentUser, setShownUser, setUpdateMes
             )}
             <form className='DiscussionReply' onSubmit={(e) => {
                 e.preventDefault();
+                console.log(`Replying to discussion id: ${discussion._id}...`)
                 postReply();
                 setMessage('');
             }}>
