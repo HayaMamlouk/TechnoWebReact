@@ -7,7 +7,7 @@ It is designed to work with the [backend implemented using ExpressJS](https://gi
 
 ```shell
 git clone https://github.com/HayaMamlouk/TechnoWebReact.git
-cd TechnoWebReact/app-react
+cd TechnoWebReact
 npm install
 ```
 
