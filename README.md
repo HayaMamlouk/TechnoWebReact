@@ -16,7 +16,7 @@ npm install
 You should be able to start the web app without any problems, using the following command:
 
 ```shell
-npm run serve
+npm run dev
 ```
 
 ## Creators
